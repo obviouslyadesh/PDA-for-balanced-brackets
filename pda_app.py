@@ -106,7 +106,7 @@ def visualize_derivation_tree(steps: List[Dict]):
 
 # Streamlit Interface
 st.set_page_config(page_title="PDA Bracket Validator", layout="centered")
-st.title("🔢 PDA-Based Bracket Validator")
+st.title("PDA-Based Bracket Validator")
 st.markdown("""
 This app checks whether a given string of brackets is **balanced** using a **Pushdown Automaton (PDA)**.
 It also shows the **Leftmost (LMD)** and **Rightmost Derivations (RMD)** for valid strings.
@@ -121,35 +121,35 @@ if input_str:
     if pda.validate(input_str):
         st.success("✅ The string is balanced and accepted by the PDA.")
 
-        st.subheader("📜 PDA Transition Trace")
+        st.subheader("PDA Transition Trace")
         for symbol, stack in pda.get_trace():
             st.write(f"**Input:** {symbol} → **Stack:** {''.join(stack) if stack else 'Empty'}")
 
-        st.subheader("🧮 PDA Trace Visualization (Graphviz)")
+        st.subheader("PDA Trace Visualization (Graphviz)")
         dot = draw_pda_trace(pda.get_trace())
         st.graphviz_chart(dot.source)
 
-        st.subheader("⚙️ Animated PDA Trace (streamlit-agraph)")
+        st.subheader("Animated PDA Trace (streamlit-agraph)")
         agraph_trace(pda.get_trace())
 
-        st.subheader("🌳 Leftmost Derivation (LMD) Tree")
+        st.subheader("Leftmost Derivation (LMD) Tree")
         lmd_steps = parser.generate_lmd(input_str)
         visualize_derivation_tree(lmd_steps)
 
-        st.subheader("🌲 Rightmost Derivation (RMD) Tree")
+        st.subheader("Rightmost Derivation (RMD) Tree")
         rmd_steps = parser.generate_rmd(input_str)
         visualize_derivation_tree(rmd_steps)
 
     else:
         st.error("❌ The string is not balanced and rejected by the PDA.")
 
-        st.subheader("📜 PDA Transition Trace")
+        st.subheader("PDA Transition Trace")
         for symbol, stack in pda.get_trace():
             st.write(f"**Input:** {symbol} → **Stack:** {''.join(stack) if stack else 'Empty'}")
 
-        st.subheader("🧮 PDA Trace Visualization (Graphviz)")
+        st.subheader("PDA Trace Visualization (Graphviz)")
         dot = draw_pda_trace(pda.get_trace())
         st.graphviz_chart(dot.source)
 
-        st.subheader("⚙️ Animated PDA Trace (streamlit-agraph)")
+        st.subheader("Animated PDA Trace (streamlit-agraph)")
         agraph_trace(pda.get_trace())
